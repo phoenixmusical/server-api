@@ -3,7 +3,7 @@ var User = require('../../../models/user');
 
 module.exports = function(req, res, next){
 	var comity;
-	Comity.findById(req.params.id)
+	Comity.findById(req.params.comity)
 		.populate('members')
 		.exec()
 		.then(function(c){
