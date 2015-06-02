@@ -1,0 +1,14 @@
+{
+  "name": "phoenixmusical-api",
+  "version": "0.0.0",
+  "description": "Phoenix Musical's API",
+  "main": "index.js",
+  "author": "fgascon",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "debug": "^2.2.0",
+    "mongoose": "^4.0.4",
+    "restify": "^3.0.3",
+    "s-conf": "0.0.0"
+  }
+}
