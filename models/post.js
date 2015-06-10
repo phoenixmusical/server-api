@@ -2,7 +2,10 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var PostSchema = new mongoose.Schema({
-	name: String,
+	name: {
+		type: String,
+		trim: true
+	},
 	comity: {
 		type: ObjectId,
 		ref: 'Comity'
@@ -11,8 +14,12 @@ var PostSchema = new mongoose.Schema({
 		type: ObjectId,
 		ref: 'User'
 	},
+	date: {
+		type: Date,
+		'default': Date.now
+	},
 	items: [{
-		type: String,
+		item_type: String,
 		content: String,
 		importance: Number,
 		author: {
