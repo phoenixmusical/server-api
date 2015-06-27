@@ -23,13 +23,13 @@ module.exports = function(req, res, next){
 					_href: postsBaseUrl+post._id,
 					id: post._id,
 					name: post.name,
-					creator: {
+					creator: creator ? {
 						_href: baseUrl+'/users/'+creator._id,
 						id: creator._id,
 						email: creator.email,
 						firstname: creator.firstname,
 						lastname: creator.lastname,
-					}
+					} : null
 				};
 			}));
 		}, next)
