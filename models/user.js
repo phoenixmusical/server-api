@@ -20,7 +20,7 @@ UserSchema.methods.setPassword = function(password){
     		return deferred.reject(err);
     	}
     	self.local.passhash = hash;
-    	deferred.resolve();
+    	deferred.resolve(self);
     });
     return deferred.promise;
 };
