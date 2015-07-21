@@ -2,11 +2,14 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var baseUrl = require('s-conf').require('base_url');
 
-var PostSchema = new mongoose.Schema({
+var EventSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		trim: true
 	},
+	description: String,
+	start: Number,
+	end: Number,
 	comity: {
 		type: ObjectId,
 		ref: 'Comity'
@@ -14,28 +17,22 @@ var PostSchema = new mongoose.Schema({
 	creator: {
 		type: ObjectId,
 		ref: 'User'
-	},
-	date: {
-		type: Date,
-		'default': Date.now
-	},
-	items: [{
-		item_type: String,
-		content: String,
-		importance: Number,
-		author: {
-			type: ObjectId,
-			ref: 'User'
-		}
-	}]
+	}
 });
 
-PostSchema.methods.extractData = function(){
+/*EventSchema.virtual('duration').get(function(){
+    return this.end - this.start;
+});*/
+
+EventSchema.methods.extractData = function(){
 	var creator = this.creator;
 	return {
-		_href: baseUrl+'/comities/'+this.comity+'/posts/'+this._id,
+		_href: baseUrl+'/comities/'+this.comity+'/events/'+this._id,
 		id: this._id,
 		name: this.name,
+		description: this.description,
+		start: this.start,
+		end: this.end,
 		creator: creator ? {
 			_href: baseUrl+'/users/'+creator._id,
 			id: creator._id,
@@ -46,4 +43,4 @@ PostSchema.methods.extractData = function(){
 	};
 };
 
-module.exports = mongoose.model('Post', PostSchema);
+module.exports = mongoose.model('Event', EventSchema);

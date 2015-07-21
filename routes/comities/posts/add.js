@@ -1,16 +1,9 @@
-var Comity = require('../../../models/comity');
+var findComity = require('../_find-comity');
 var Post = require('../../../models/post');
 
 module.exports = function(req, res, next){
-	var post;
-	Comity.findById(req.params.comity)
-		.populate('posts')
-		.exec()
-		.then(function(c){
-			comity = c;
-			if(!comity){
-				throw new Error("Comity not found");
-			}
+	findComity(req)
+		.then(function(comity){
 			var post = new Post();
 			post.name = req.body.name;
 			post.comity = comity._id;
